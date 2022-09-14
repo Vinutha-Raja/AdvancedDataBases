@@ -4,6 +4,7 @@
 #include <inttypes.h>
 #include <stdbool.h>
 #include "lock.h"
+#include "partitioned_counter.h"
 
 #ifdef __cplusplus
 #define __restrict__
@@ -15,6 +16,8 @@ extern "C" {
 	#define D_CHOICES 2
 	#define MAX_LG_LG_N 4
 	#define C_LV2 6
+	
+	#define THRESHOLD 10
 
 	typedef uint64_t KeyType;
 	typedef uint64_t ValueType;
@@ -59,6 +62,11 @@ extern "C" {
 		uint64_t lv1_balls;
 		uint64_t lv2_balls;
 		uint64_t lv3_balls;
+
+        pc_t * partitioned_lv1_balls;
+		pc_t * partitioned_lv2_balls;
+		pc_t * partitioned_lv3_balls;
+
 		iceberg_lv1_block_md * lv1_md;
 		iceberg_lv2_block_md * lv2_md;
 		uint64_t * lv3_sizes;
